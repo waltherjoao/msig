@@ -24,7 +24,7 @@ export class AddBookComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   selectedBindingType: string;
   bookForm: FormGroup;
-  BindingType: any = ['Paperback', 'Case binding', 'Perfect binding', 'Saddle stitch binding', 'Spiral binding'];
+  BindingType: any = ['Libro de bolsillo', 'Caso vinculante', 'Unión perfecta', 'Encuadernación', 'Encuadernación en espiral'];
 
   ngOnInit() { 
     this.bookApi.GetBookList();

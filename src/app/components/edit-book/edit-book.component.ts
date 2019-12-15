@@ -26,7 +26,7 @@ export class EditBookComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   selectedBindingType: string;
   editBookForm: FormGroup;
-  BindingType: any = ['Paperback', 'Case binding', 'Perfect binding', 'Saddle stitch binding', 'Spiral binding'];
+  BindingType: any = ['Libro de bolsillo', 'Caso vinculante', 'Unión perfecta', 'Encuadernación', 'Encuadernación en espiral'];
 
   ngOnInit() {
     this.updateBookForm();

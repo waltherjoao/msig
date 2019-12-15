@@ -1,6 +1,6 @@
  <!-- Title group  -->
  <div class="title-group">
-   <h1 class="mat-h1">Add Book</h1>
+   <h1 class="mat-h1">Agregar Libro</h1>
    <mat-divider fxFlex="1 0"></mat-divider>
  </div>
 
@@ -12,9 +12,9 @@
        <div class="controlers-wrapper">
          <!-- Book name -->
          <mat-form-field class="example-full-width">
-           <input matInput placeholder="Book name" formControlName="book_name">
+           <input matInput placeholder="Nombre del libro" formControlName="book_name">
            <mat-error *ngIf="handleError('book_name', 'required')">
-             You must provide a<strong>book name</strong>
+             Se debe proporcionar un <strong>nombre del libro</strong>
            </mat-error>
          </mat-form-field>
 
@@ -23,32 +23,32 @@
            <input matInput placeholder="ISBN-10" formControlName="isbn_10" pattern="[0-9]*" minlength="10"
              maxlength="10">
            <mat-error *ngIf="handleError('isbn_10', 'required')">
-             You must provide a <strong>10 digit ISBN</strong>
+            Se debe proporcionar un <strong>ISBN de 10 dígitos</strong>
            </mat-error>
            <mat-error *ngIf="handleError('isbn_10', 'pattern')">
-             Only numbers are allowed
+             Solo se permiten números
            </mat-error>
            <mat-error *ngIf="handleError('isbn_10', 'minlength')">
-             Your <strong>ISBN</strong> must be 10 digit
+             Su <strong>ISBN</strong> debe ser de 10 dígitos
            </mat-error>
          </mat-form-field>
 
-         <!-- Author name -->
+         <!-- Autor -->
          <mat-form-field class="example-full-width">
-           <input matInput placeholder="Author name" formControlName="author_name">
+           <input matInput placeholder="Autor" formControlName="author_name">
            <mat-error *ngIf="handleError('author_name', 'required')">
-             You must provide an <strong>author name</strong>
+            Se debe proporcionar un <strong>autor</strong>
            </mat-error>
          </mat-form-field>
 
-         <!-- Publication date -->
+         <!-- Fecha de publicación -->
          <mat-form-field>
-           <input matInput readonly [matDatepicker]="picker" placeholder="Publication date"
+           <input matInput readonly [matDatepicker]="picker" placeholder="Fecha de publicación"
              formControlName="publication_date" (dateChange)="formatDate($event)">
            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
            <mat-datepicker #picker></mat-datepicker>
            <mat-error *ngIf="handleError('publication_date', 'required')">
-             Publication date is required
+             La fecha de publicación es requerida.
            </mat-error>
          </mat-form-field>
        </div>
@@ -57,27 +57,27 @@
      <!-- Right block -->
      <mat-card>
        <div class="controlers-wrapper">
-         <!-- Book binding -->
+         <!-- Presentación -->
          <mat-form-field>
-           <mat-label>Binding type</mat-label>
+           <mat-label>Tipo de encuadernación</mat-label>
            <mat-select [(value)]="selected" formControlName="binding_type">
              <mat-option [value]="bindingType" *ngFor="let bindingType of BindingType">{{bindingType}}</mat-option>
            </mat-select>
            <mat-error *ngIf="handleError('binding_type', 'required')">
-             Binding type is required
+            Tipo de encuadernación es requerida
            </mat-error>
          </mat-form-field>
 
-         <!-- Book stock -->
+         <!-- Disponibilidad -->
          <div class="misc-bottom-padding">
-           <mat-label>Available in stock: </mat-label>
-           <mat-radio-group aria-label="Select an option" formControlName="in_stock">
-             <mat-radio-button value="Yes">Yes</mat-radio-button>
+           <mat-label>Disponible en stock: </mat-label>
+           <mat-radio-group aria-label="Seleccione una opción" formControlName="in_stock">
+             <mat-radio-button value="Si">Si</mat-radio-button>
              <mat-radio-button value="No">No</mat-radio-button>
            </mat-radio-group>
          </div>
 
-         <!-- Add languages -->
+         <!-- Agregar idioma -->
          <mat-form-field class="multiple-items">
            <mat-chip-list #chipList>
              <mat-chip *ngFor="let lang of languageArray" [selectable]="selectable" [removable]="removable"
@@ -85,23 +85,23 @@
                {{lang.name}}
                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
              </mat-chip>
-             <input placeholder="Add languages" [matChipInputFor]="chipList"
+             <input placeholder="Agregar idioma" [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                (matChipInputTokenEnd)="add($event)">
            </mat-chip-list>
-           <i class="material-icons tooltip-info" matTooltip="Enter item name and press enter to add multiple items">
+           <i class="material-icons tooltip-info" matTooltip="Ingrese el nombre del elemento y presione enter para agregar varios elementos">
              info
            </i>
          </mat-form-field>
        </div>
      </mat-card>
 
-     <!-- Submit & Reset -->
+     <!-- Enviar & Limpiar -->
      <mat-card>
        <div class="full-wrapper button-wrapper">
          <div class="button-wrapper">
-           <button mat-flat-button color="warn">Submit</button>
-           <button mat-flat-button color="war" (click)="resetForm()">Clear</button>
+           <button mat-flat-button color="warn">Enviar</button>
+           <button mat-flat-button color="war" (click)="resetForm()">Limpiar</button>
          </div>
        </div>
      </mat-card>
