@@ -40,6 +40,12 @@ export class BookService {
     return this.booksRef;
   }
 
+  /* Get book list */
+  GetBookListSearch(lstBook : Book) {
+    this.booksRef = this.db.list('books-list', ref => ref.orderByChild('binding_type').equalTo('Caso vinculante'));
+    return this.booksRef;
+  }
+
   /* Update book */
   UpdateBook(id, book: Book) {
     this.bookRef.update({

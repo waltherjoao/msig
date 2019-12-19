@@ -55,14 +55,14 @@
 
     <mat-card>
       <div class="controlers-wrapper">
-        <!-- Encuadernación -->
+        <!-- Perfiles -->
         <mat-form-field>
-          <mat-label>Tipo de encuadernación</mat-label>
+          <mat-label>Tipo de perfil</mat-label>
           <mat-select [(value)]="selected" formControlName="binding_type">
             <mat-option [value]="bindingType" *ngFor="let bindingType of BindingType">{{bindingType}}</mat-option>
           </mat-select>
           <mat-error *ngIf="handleError('binding_type', 'required')">
-            Tipo de encuadernación es requerida
+            Tipo de perfil es requerida
           </mat-error>
         </mat-form-field>
 
@@ -75,7 +75,7 @@
           </mat-radio-group>
         </div>
 
-        <!-- Agregar idioma -->
+        <!-- Agregar tópicos -->
         <mat-form-field class="multiple-items">
           <mat-chip-list #chipList>
             <mat-chip *ngFor="let lang of languageArray" [selectable]="selectable" [removable]="removable"
@@ -83,7 +83,7 @@
               {{lang.name}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="Agregar idioma" [matChipInputFor]="chipList"
+            <input placeholder="Agregar tópicos" [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
               (matChipInputTokenEnd)="add($event)">
           </mat-chip-list>

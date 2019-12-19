@@ -1,6 +1,6 @@
 <!-- Title group  -->
 <div class="title-group">
-  <h1 class="mat-h1">Listado de libros</h1>
+  <h1 class="mat-h1">Busqueda de libros</h1>
   <mat-divider fxFlex="1 0"></mat-divider>
 </div>
 
@@ -9,6 +9,56 @@
 
 <!-- Books list Angular material data table -->
 <div class="container" *ngIf="BookData.length > 0">
+
+  <div class="inner-wrapper">
+    <form [formGroup]="lstBookForm" (ngSubmit)="searchBook()" #resetListBookForm="ngForm">
+      <!-- Perfiles -->
+      <mat-card>
+          <div class="controlers-wrapper">
+            <mat-form-field>
+              <mat-label>Tipo de perfil</mat-label>
+              <mat-select [(value)]="selected" formControlName="binding_type">
+                <mat-option [value]="bindingType" *ngFor="let bindingType of BindingType">{{bindingType}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="handleError('binding_type', 'required')">
+                Tipo de perfil es requerida
+              </mat-error>
+            </mat-form-field>
+          </div>
+      </mat-card>
+      <!-- Agregar tópicos -->
+      <mat-card>
+        <div class="controlers-wrapper">
+          <mat-form-field class="multiple-items">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let lang of languageArray" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(lang)">
+                {{lang.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Agregar tópicos" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <i class="material-icons tooltip-info" matTooltip="Ingrese el nombre del elemento y presione enter para agregar varios elementos">
+              info
+            </i>
+          </mat-form-field>
+        </div>
+      </mat-card>
+      
+      <!-- Enviar & Limpiar -->
+     <mat-card>
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button mat-flat-button color="warn">Buscar</button>
+          <button mat-flat-button color="war" (click)="resetForm()">Limpiar</button>
+        </div>
+      </div>
+    </mat-card>
+    </form>
+  </div>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="$key">
