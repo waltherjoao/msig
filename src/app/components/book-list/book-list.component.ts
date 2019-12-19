@@ -115,8 +115,31 @@ export class BookListComponent implements OnInit{
    /* Submit book */
    searchBook() {
     if (this.lstBookForm.valid){
-      this.bookApi.GetBookListSearch(this.lstBookForm.value)
-      this.resetForm();
+      this.bookApi.GetBookListSearch()
+      .snapshotChanges().subscribe(books => {
+          books.forEach(item => {
+            let a = item.payload.toJSON();
+            a['$key'] = item.key;
+            var topicos = a['languages'];
+            for (var key in topicos) {
+              if(topicos[key].name == 'Alemán')
+              {
+                this.BookData.push(a as Book)
+              }
+            }
+
+
+          })
+          /* Data table */
+          this.dataSource = new MatTableDataSource(this.BookData);
+          /* Pagination */
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+          }, 0);
+      })
+
+      //this.bookApi.GetBookListSearch(this.lstBookForm.value)
+      //this.resetForm();
     }
   }
 }
