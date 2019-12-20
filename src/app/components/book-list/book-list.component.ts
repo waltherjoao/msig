@@ -45,7 +45,7 @@ export class BookListComponent implements OnInit{
   submitBookForm() {
     this.lstBookForm = this.fb.group({
       binding_type: ['', [Validators.required]],
-      languages: [this.languageArray]
+      keywords: [this.languageArray]
     })
   }
   
@@ -71,7 +71,7 @@ export class BookListComponent implements OnInit{
     return this.lstBookForm.controls[controlName].hasError(errorName);
   }
 
-  /* Add dynamic languages */
+  /* Add dynamic keywords */
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -95,7 +95,7 @@ export class BookListComponent implements OnInit{
     }
   }
 
-  /* Remove dynamic languages */
+  /* Remove dynamic keywords */
   remove(language: Language): void {
     const index = this.languageArray.indexOf(language);
     if (index >= 0) {
@@ -115,12 +115,12 @@ export class BookListComponent implements OnInit{
    /* Submit book */
    searchBook() {
     if (this.lstBookForm.valid){
-      this.bookApi.GetBookListSearch()
+      this.bookApi.GetBookListSearch(this.lstBookForm.value)
       .snapshotChanges().subscribe(books => {
           books.forEach(item => {
             let a = item.payload.toJSON();
             a['$key'] = item.key;
-            var topicos = a['languages'];
+            var topicos = a['keywords'];
             for (var key in topicos) {
               if(topicos[key].name == 'Alemán')
               {
@@ -131,6 +131,7 @@ export class BookListComponent implements OnInit{
 
           })
           /* Data table */
+          this.dataSource.filter = '';
           this.dataSource = new MatTableDataSource(this.BookData);
           /* Pagination */
           setTimeout(() => {

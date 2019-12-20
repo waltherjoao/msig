@@ -21,7 +21,7 @@ export class BookService {
       publication_date: book.publication_date,
       binding_type: book.binding_type,
       in_stock: book.in_stock,
-      languages: book.languages
+      keywords: book.keywords
     })
     .catch(error => {
       this.errorMgmt(error);
@@ -41,8 +41,8 @@ export class BookService {
   }
 
   /* Get book list */
-  GetBookListSearch() {
-    this.booksRef = this.db.list('books-list', ref => ref.orderByChild('binding_type').equalTo('Caso vinculante'));
+  GetBookListSearch(book: Book) {
+    this.booksRef = this.db.list('books-list', ref => ref.orderByChild('binding_type').equalTo(book.binding_type));
     return this.booksRef;
   }
 
@@ -55,7 +55,7 @@ export class BookService {
       publication_date: book.publication_date,
       binding_type: book.binding_type,
       in_stock: book.in_stock,
-      languages: book.languages
+      keywords: book.keywords
     })
     .catch(error => {
       this.errorMgmt(error);

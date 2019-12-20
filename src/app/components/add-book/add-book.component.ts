@@ -36,7 +36,7 @@ export class AddBookComponent implements OnInit {
     private bookApi: BookService
   ) { }
 
-  /* Remove dynamic languages */
+  /* Remove dynamic keywords */
   remove(language: Language): void {
     const index = this.languageArray.indexOf(language);
     if (index >= 0) {
@@ -53,7 +53,7 @@ export class AddBookComponent implements OnInit {
       publication_date: ['', [Validators.required]],
       binding_type: ['', [Validators.required]],
       in_stock: ['Yes'],
-      languages: [this.languageArray]
+      keywords: [this.languageArray]
     })
   }
 
@@ -62,7 +62,7 @@ export class AddBookComponent implements OnInit {
     return this.bookForm.controls[controlName].hasError(errorName);
   }
 
-  /* Add dynamic languages */
+  /* Add dynamic keywords */
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;

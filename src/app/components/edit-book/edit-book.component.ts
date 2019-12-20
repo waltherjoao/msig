@@ -41,7 +41,7 @@ export class EditBookComponent implements OnInit {
   ) { 
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.bookApi.GetBook(id).valueChanges().subscribe(data => {
-      this.languageArray = data.languages;
+      this.languageArray = data.keywords;
       this.editBookForm.setValue(data);
     })
   }
@@ -55,7 +55,7 @@ export class EditBookComponent implements OnInit {
       publication_date: ['', [Validators.required]],
       binding_type: ['', [Validators.required]],
       in_stock: ['Yes'],
-      languages: ['']
+      keywords: ['']
     })
   }
 

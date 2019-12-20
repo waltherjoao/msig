@@ -6,5 +6,5 @@ export interface Book {
    publication_date: Date;
    binding_type: string;
    in_stock: string;
-   languages: Array<string>;
+   keywords: Array<string>;
 }
