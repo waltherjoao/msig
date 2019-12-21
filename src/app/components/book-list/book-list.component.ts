@@ -115,6 +115,7 @@ export class BookListComponent implements OnInit{
    /* Submit book */
    searchBook() {
     if (this.lstBookForm.valid){
+      this.refresh();
       this.bookApi.GetBookListSearch(this.lstBookForm.value)
       .snapshotChanges().subscribe(books => {
           books.forEach(item => {
@@ -131,7 +132,6 @@ export class BookListComponent implements OnInit{
 
           })
           /* Data table */
-          this.dataSource.filter = '';
           this.dataSource = new MatTableDataSource(this.BookData);
           /* Pagination */
           setTimeout(() => {
@@ -142,5 +142,11 @@ export class BookListComponent implements OnInit{
       //this.bookApi.GetBookListSearch(this.lstBookForm.value)
       //this.resetForm();
     }
+  }
+
+  refresh() {
+    const data = this.dataSource.data;
+    data.splice((this.paginator.pageIndex * this.paginator.pageSize) + 0, data.length);
+    this.dataSource.data = data;
   }
 }
