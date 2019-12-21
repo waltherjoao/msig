@@ -122,12 +122,23 @@ export class BookListComponent implements OnInit{
             let a = item.payload.toJSON();
             a['$key'] = item.key;
             var topicos = a['keywords'];
-            for (var key in topicos) {
-              if(topicos[key].name == 'Alemán')
-              {
-                this.BookData.push(a as Book)
+            var cantidadBusqueda = this.lstBookForm.value['keywords'].length;
+            var resultado = 0;
+            for (var claves in this.lstBookForm.value['keywords']){
+              for (var key in topicos) {
+                if(topicos[key].name == this.lstBookForm.value['keywords'][claves].name)
+                {
+                  resultado++;
+                  continue;
+                }
               }
+              
             }
+            if(cantidadBusqueda == resultado)
+            {
+              this.BookData.push(a as Book)
+            }
+            
 
 
           })
